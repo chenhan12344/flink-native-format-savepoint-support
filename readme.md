@@ -397,8 +397,4 @@ Flink1.13版本的Savepoint为了实现在不同状态后端之间的切换（Em
 
 ### 3.使用方法
 
-工程打包后在BDP平台的【文件UDF】页面中上传打包好的jar包（在实时开发页面上传会因为依赖检测不通过而无法上传），对于需要使用Native格式Savepoint的任务，在任务开发页面的【依赖包】中添加上传的jar包后启动任务即可，任务会优先加载依赖包中的Flink核心框架代码，从而实现Native格式Savepoint的支持。
-
-由于改造点仅涉及Checkpoint生成逻辑，不涉Checkpoint恢复的相关逻辑，去除依赖包后也依然能够从Native格式的Savepoint启动，如需切换回Canonical Savepoint直接将依赖包移除即可，即该支持包可以实现Savepoint格式的无感切换。
-
-![使用方法](imgs/使用方法.png)
+工程打包后在flink任务启动时加上参数```-classpath flink-1.13.5-native-format-savepoint-support.jar```
